@@ -325,6 +325,7 @@
 
 	<!-- Navigation -->
 	<message key="navigation.catalog">Catalog</message>
+	<message key="navigation.tagcloud">Nerd Entities</message>
 	<message key="navigation.competingInterestPolicy">Competing Interest Policy</message>
 	<message key="navigation.catalog.manage">Manage</message>
 	<message key="navigation.catalog.administration.short">Administration</message>

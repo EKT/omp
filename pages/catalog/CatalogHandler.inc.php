@@ -55,6 +55,8 @@ class CatalogHandler extends Handler {
 		$this->setupTemplate($request);
 		$press = $request->getPress();
 
+		$nerd_entity = $request->_requestVars['nerd_entity'];
+
 		// Fetch the monographs to display
 		$publishedMonographDao = DAORegistry::getDAO('PublishedMonographDAO');
 		$publishedMonographs = $publishedMonographDao->getByPressId($press->getId());
@@ -64,6 +66,8 @@ class CatalogHandler extends Handler {
 		$featureDao = DAORegistry::getDAO('FeatureDAO');
 		$featuredMonographIds = $featureDao->getSequencesByAssoc(ASSOC_TYPE_PRESS, $press->getId());
 		$templateMgr->assign('featuredMonographIds', $featuredMonographIds);
+
+        $templateMgr->assign('nerd_entity', $nerd_entity);
 
 		// Display
 		$templateMgr->display('frontend/pages/catalog.tpl');

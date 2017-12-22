@@ -1,0 +1,50 @@
+  .nerd-tag-cloud{
+      font-size: 24px;
+  }
+  .word {
+  	font-family: Verdana, Tahoma, Arial;
+  	padding: 4px 4px 4px 4px;
+  	letter-spacing: 3px;
+  	text-decoration: none;
+  	font-weight: normal;
+  }
+  .size9 a{
+  	color: #398739;
+  	font-size: 1em;
+  }
+  .size8 a {
+  	color: #c43c35;
+  	font-size: 0.9em;
+  }
+  .size7 a {
+  	color: #f89406;
+  	font-size: 0.8em;
+  }
+  .size6 a {
+  	color: #01A9DB;
+  	font-size: 0.7em;
+  }
+  .size5 a {
+  	color: #8904B1;
+  	font-size: 0.6em;
+  }
+  .size4 a {
+  	color: #c43c35;
+  	font-size: 0.5em;
+  }
+  .size3 a {
+  	color: #c43c35;
+  	font-size: 0.4em;
+  }
+  .size2 a {
+  	color: #c43c35;
+  	font-size: 0.3em;
+  }
+  .size1 a {
+  	color: #87A1A8;
+  	font-size: 0.2em;
+  }
+  .size0 a {
+     color: #398739;
+     font-size: 0.1em;
+  }

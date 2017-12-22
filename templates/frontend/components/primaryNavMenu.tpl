@@ -24,6 +24,12 @@
 		</a>
 	</li>
 
+	<li>
+		<a href="{url router=$smarty.const.ROUTE_PAGE page="tagcloud"}">
+            {translate key="navigation.tagcloud"}
+		</a>
+	</li>
+
 	{if $currentPress && ($currentPress->getLocalizedSetting('masthead') || $currentPress->getLocalizedSetting('submissions'))}
 		{assign var="submenu_attr" value=" aria-haspopup='true' aria-expanded='false'"}
 	{/if}

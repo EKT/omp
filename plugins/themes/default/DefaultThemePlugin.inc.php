@@ -53,7 +53,7 @@ class DefaultThemePlugin extends ThemePlugin {
 			'default' => '#1E6292',
 		));
 
-		// Load primary stylesheet
+        // Load primary stylesheet
 		$this->addStyle('stylesheet', 'styles/index.less');
 
 		// Store additional LESS variables to process based on options
@@ -151,6 +151,15 @@ class DefaultThemePlugin extends ThemePlugin {
 
 		// Load custom JavaScript for this theme
 		$this->addScript('default', 'js/main.js');
+
+        // Load custom css/less (nerd) for this theme
+        $this->addStyle('nerd14', 'styles/nerd.less');
+        $this->addStyle('bootstrap', 'styles/bootstrap.css');
+		// Load custom javascript (nerd) for this theme
+        $this->addScript('nerd', 'js/nerd.js');
+        $this->addScript('bootstrap', 'js/bootstrap.min.js');
+
+        $this->addStyle('tagcloud5', 'styles/tagcloud.css');
 	}
 
 	/**
