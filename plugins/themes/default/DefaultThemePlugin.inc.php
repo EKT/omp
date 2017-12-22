@@ -173,6 +173,14 @@ class DefaultThemePlugin extends ThemePlugin {
 
 		// Add navigation menu areas for this theme
 		$this->addMenuArea(array('primary', 'user'));
+        // Load custom css/less (nerd) for this theme
+        $this->addStyle('nerd14', 'styles/nerd.less');
+        $this->addStyle('bootstrap', 'styles/bootstrap.css');
+		// Load custom javascript (nerd) for this theme
+        $this->addScript('nerd', 'js/nerd.js');
+        $this->addScript('bootstrap', 'js/bootstrap.min.js');
+
+        $this->addStyle('tagcloud5', 'styles/tagcloud.css');
 	}
 
 	/**

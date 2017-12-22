@@ -17,6 +17,10 @@
 		{translate key="catalog.browseTitles" numTitles=$publishedMonographs|@count}
 	</div>
 
+	{if $nerd_entity}
+		<div>Catalog based on nerd entity: <b>{$nerd_entity}</b></div>
+    {/if}
+
 	{* No published titles *}
 	{if !$publishedMonographs|@count}
 		<h2>

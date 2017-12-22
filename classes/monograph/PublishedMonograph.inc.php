@@ -17,11 +17,16 @@
 
 import('classes.monograph.Monograph');
 
+require_once('./classes/indexing/SolrIndex.inc.php');
+require_once('./lib/nerd-api/EKTWebServiceManager.php');
+
 // Access status
 define('ARTICLE_ACCESS_ISSUE_DEFAULT', 0);
 define('ARTICLE_ACCESS_OPEN', 1);
 
 class PublishedMonograph extends Monograph {
+
+    public $nerd_entities = array(); //array of Category
 
 	/**
 	 * Constructor.
@@ -215,6 +220,50 @@ class PublishedMonograph extends Monograph {
 		$representativeDao = DAORegistry::getDAO('RepresentativeDAO');
 		return $representativeDao->getAgentsByMonographId($this->getId());
 	}
+
+    function getNerdEntities() {
+        return $this->nerd_entities;
+    }
+
+    function getAbstractEntities() {
+		$abstract = $this->getLocalizedAbstract();
+        $theresponse = EKTWebServiceManager::disambiguateText($abstract, "en");
+
+        SolrIndex::indexAbstract($this, $abstract, $theresponse);
+
+        $this->nerd_entities = $theresponse->entities;
+
+        if ($theresponse->has_error){
+            return "[ERROR] " . $theresponse->error_msg;
+        }
+        else {
+            for( $i = 0; $i<count($theresponse->entities); $i++ ) {
+            	$index = count($theresponse->entities)-$i-1;
+                $entity = $theresponse->entities[$index];
+                $abstract_before = mb_substr($abstract,0, $entity->offset_start);
+                $abstract_after = mb_substr($abstract,$entity->offset_end);
+                $abstract_middle = mb_substr($abstract,$entity->offset_start,$entity->offset_end-$entity->offset_start);
+
+                $custom_class = NULL;
+                if (!is_null($entity->type)){
+                	$custom_class=$entity->type;
+				}
+                for( $j = 0; $j<count($entity->domains); $j++ ) {
+                	if (!is_null($custom_class)){
+                        $custom_class = $custom_class." ";
+					}
+					else {
+                        $custom_class = "";
+					}
+                    $custom_class = $custom_class . $entity->domains[$j];
+                }
+                $custom_class = strtolower($custom_class);
+                $abstract = $abstract_before . "<span class='nerd nerd_".$entity->offset_start." ".$custom_class."'>".$abstract_middle."</span>" . $abstract_after;
+            }
+
+            return $abstract;
+        }
+    }
 }
 
 ?>
